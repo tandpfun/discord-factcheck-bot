@@ -7,8 +7,7 @@ const app = express();
 const bodyParser = require('body-parser'); // Parse POST Requests for Dashboard
 const fs = require('fs'); // File System
 const Discord = require("discord.js") // Discord API Wrapper
-const mongooose = require('mongoose')
-const blapi = require("blapi"); // Bot Lists
+const mongooose = require('mongoose') // Database
 const Enmap = require("enmap"); // Better Javascript Mapping
 const axios = require("axios"); // Web requests
 require('dotenv').config() // .env File
@@ -20,7 +19,7 @@ const functions = require('./utils/functions.js')
 const manager = new Discord.ShardingManager('./bot.js', { token: process.env.TOKEN });
 
 manager.spawn(); // Start shards autmatically
-manager.on('shardCreate', shard => console.log(`[Manager] Launched shard ${shard.id}`));
+manager.on('shardCreate', shard => console.log(`[Manager] Launched Shard ${shard.id}...`));
 
 /* Cache Clearing */
 // Removes users from the user and guild cache to prevent high usage of memory. Not really to neccsary on this bot, though.
@@ -38,6 +37,6 @@ setInterval(() => {
         sh.forEach(s => {
             total += s
         })
-        console.log(`Sharding Manager -> Cleared ${total} users from the cache.`)
+        console.log(`[Manager] Cleared ${total} users from the cache.`)
     })
 }, 10 * 60 * 1000)

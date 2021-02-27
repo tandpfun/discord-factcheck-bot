@@ -173,7 +173,7 @@ const functions = {
         let merged = Object.assign(defaults, settings);
 
         const newGuild = await new Guild(merged);
-        await newGuild.save().then(log(`&lgrnGuild ${merged.guildID} added to the database!`, "Mongo"));
+        await newGuild.save().then(console.log(`[MongoDB] Guild ${merged.guildID} added to the database!`));
         return newGuild
     },
     createUser: async (data) => {
