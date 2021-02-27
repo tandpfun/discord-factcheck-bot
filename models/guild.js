@@ -12,15 +12,7 @@ const guildSchema = mongoose.Schema({
         type: Boolean,
         default: defaults.checkMessages
     },
-    deleteFalseFacts: {
-        type: Boolean,
-        default: defaults.deleteFalseFacts
-    },
-    falseFactThreshold: {
-        type: Number,
-        default: defaults.falseFactThreshold
-    },
-    checkedFalseCount: {
+    messagesCheckedFalse: {
         type: Number,
         default: defaults.checkedFalseCount
     },
@@ -28,7 +20,7 @@ const guildSchema = mongoose.Schema({
         type: Number,
         default: defaults.messagesChecked
     },
-    checkErrors: {
+    messagesCheckedError: {
         type: Number,
         default: defaults.checkErrors
     },
