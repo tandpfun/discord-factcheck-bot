@@ -1,0 +1,36 @@
+{
+  "name": "discord-factcheck-bot",
+  "version": "1.0.0",
+  "description": "A Discord bot that checks facts in messages and more!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tandpfun/discord-factcheck-bot.git"
+  },
+  "keywords": [
+    "discord",
+    "factcheck",
+    "discord",
+    "bot",
+    "bot",
+    "robot"
+  ],
+  "author": "Coding#0001",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tandpfun/discord-factcheck-bot/issues"
+  },
+  "homepage": "https://github.com/tandpfun/discord-factcheck-bot#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
+    "discord.js": "^12.5.1",
+    "dotenv": "^8.2.0",
+    "enmap": "^5.8.4",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.18"
+  }
+}
