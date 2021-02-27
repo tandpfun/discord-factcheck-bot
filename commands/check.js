@@ -26,8 +26,7 @@ exports.run = async (client, message) => {
                 client.api.channels(message.channel.id).messages.post({
                     data: {
                         embed: {
-                            title: `${config.emoji.yes} ${review.textualRating}`,
-                            description: `**True Fact:** ${claim.text}\n\n**📋 Proof:** ${review.title ? review.title : ""}\n🔗 ${review.url}`,
+                            description: `**${config.emoji.yes} ${review.textualRating} Fact:** ${claim.text}\n\n**📋 Proof:** ${review.title ? review.title : ""}\n🔗 ${review.url}`,
                             color: 3066993,
                             footer: {
                                 text: `Provided by ${review.publisher.site}`
@@ -43,8 +42,7 @@ exports.run = async (client, message) => {
                 client.api.channels(message.channel.id).messages.post({
                     data: {
                         embed: {
-                            title: `${config.emoji.no} ${review.textualRating}`,
-                            description: `**False Fact:** ${claim.text}\n\n**📋 Proof:** ${review.title ? review.title : ""}\n🔗 ${review.url}`,
+                            description: `**${config.emoji.no} ${review.textualRating} Fact:** ${claim.text}\n\n**📋 Proof:** ${review.title ? review.title : ""}\n🔗 ${review.url}`,
                             color: 15158332,
                             footer: {
                                 text: `Provided by ${review.publisher.site}`
@@ -71,7 +69,7 @@ exports.help = {
     name: "check",
     usage: "check <fact>",
     aliases: [],
-    description: "Check if a fact is true or false.",
+    description: "Check if a fact is true or false",
     permissions: "all",
     category: "info"
 }

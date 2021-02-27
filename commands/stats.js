@@ -17,7 +17,7 @@ exports.help = {
     name: "stats",
     usage: "stats",
     aliases: ["statistics"],
-    description: "Get info on the detections in your server",
+    description: "Get detection statistics",
     permissions: "all",
     category: "info"
 }

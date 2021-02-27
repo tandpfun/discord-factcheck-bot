@@ -32,6 +32,10 @@ const guildSchema = mongoose.Schema({
         type: Number,
         default: defaults.checkErrors
     },
+    users: {
+        type: Array,
+        default: []
+    }
 }, {
     collection: 'guilds'
 });

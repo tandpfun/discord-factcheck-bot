@@ -12,7 +12,7 @@ exports.help = {
     name: "ping",
     usage: "ping",
     aliases: ["latency","speed"],
-    description: "Get FactCheqr's connection speed to Discord",
+    description: "Get the bot's latency",
     permissions: "all",
     category: "info"
 }

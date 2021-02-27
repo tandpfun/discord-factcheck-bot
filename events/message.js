@@ -59,7 +59,16 @@ module.exports = async (client, message) => {
                     let claim = data.claims[0]
                     let review = data.claims[0].claimReview[0]
                     if (review.textualRating === "True") {
-                        message.react(config.emoji.yes)
+                        client.api.channels(message.channel.id).messages.post({
+                            data: {
+                                content: `${config.emoji.yes} ${claim.text}`,
+                                message_reference: { message_id: message.id },
+                                allowed_mentions: {
+                                    users: []
+                                }
+                            }
+                        })
+
                         let trueCount = settings.messagesCheckedTrue+1
                         functions.updateGuild(message.guild.id, {messagesCheckedTrue: trueCount}, client)
                     } else {
@@ -68,8 +77,7 @@ module.exports = async (client, message) => {
                         client.api.channels(message.channel.id).messages.post({
                             data: {
                                 embed: {
-                                    title: `${config.emoji.no} ${review.textualRating}`,
-                                    description: `**False Fact:** ${claim.text}\n\n**📋 Proof:** ${review.title ? review.title : ""}\n🔗 ${review.url}`,
+                                    description: `**${config.emoji.no} ${review.textualRating} Fact:** ${claim.text}\n\n**📋 True Fact:** ${review.title ? review.title : ""}\n🔗 **Proof:** ${review.url}`,
                                     color: 15158332,
                                     footer: {
                                         text: `Provided by ${review.publisher.site}`
@@ -96,7 +104,16 @@ module.exports = async (client, message) => {
                         let claim = res.data.claims[0]
                         let review = res.data.claims[0].claimReview[0]
                         if (review.textualRating === "True") {
-                            message.react(config.emoji.yes)
+                            client.api.channels(message.channel.id).messages.post({
+                                data: {
+                                    content: `${config.emoji.yes} ${claim.text}`,
+                                    message_reference: { message_id: message.id },
+                                    allowed_mentions: {
+                                        users: []
+                                    }
+                                }
+                            })
+                            
                             let trueCount = settings.messagesCheckedTrue+1
                             functions.updateGuild(message.guild.id, {messagesCheckedTrue: trueCount}, client)
                         } else {
@@ -105,8 +122,7 @@ module.exports = async (client, message) => {
                             client.api.channels(message.channel.id).messages.post({
                                 data: {
                                     embed: {
-                                        title: `${config.emoji.no} ${review.textualRating}`,
-                                        description: `**False Fact:** ${claim.text}\n\n**📋 Proof:** ${review.title ? review.title : ""}\n🔗 ${review.url}`,
+                                        description: `**${config.emoji.no} ${review.textualRating} Fact:** ${claim.text}\n\n**📋 True Fact:** ${review.title ? review.title : ""}\n🔗 **Proof:** ${review.url}`,
                                         color: 15158332,
                                         footer: {
                                             text: `Provided by ${review.publisher.site}`
