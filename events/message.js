@@ -46,47 +46,82 @@ module.exports = async (client, message) => {
             let tocheck = message.content.replace(/\b(actually|also|anyways|anyway|basically|literally|lol|haha|lmao|hehe|really|you|almost|basically|etc|lool|idk|iirc|)\b/gi, "")
             tocheck = tocheck.replace(/[^a-zA-Z0-9- -$]/gi, "")
 
-            console.log(tocheck)
+            let chkdCount = settings.messagesChecked+1
+            functions.updateGuild(message.guild.id, {messagesChecked: chkdCount}, client)
 
-            axios.get('https://factchecktools.googleapis.com/v1alpha1/claims:search', {
-                params: {
-                    key: process.env.GOOGLE_API_KEY,
-                    query: tocheck,
-                    languageCode: "en-US",
-                }
-            }).then(res => {
-
-                let chkdCount = settings.messagesChecked+1
-                functions.updateGuild(message.guild.id, {messagesChecked: chkdCount}, client)
-
-                if (res.data.claims) {
-                    let claim = res.data.claims[0]
-                    let review = res.data.claims[0].claimReview[0]
-                    if (review.textualRating === "True") return;
-                    let flseCount = settings.messagesCheckedFalse+1
-                    functions.updateGuild(message.guild.id, {messagesCheckedFalse: flseCount}, client)
-                    client.api.channels(message.channel.id).messages.post({
-                        data: {
-                            embed: {
-                                title: `${config.emoji.no} ${review.textualRating}`,
-                                description: `**False Fact:** ${claim.text}\n\n**📋 Proof:** ${review.title ? review.title : ""}\n🔗 ${review.url}`,
-                                color: 15158332,
-                                footer: {
-                                    text: `Provided by ${review.publisher.site}`
+            if (previousResponses.get(tocheck)) {
+                let data = previousResponses.get(tocheck)
+                if (data.claims) {
+                    let claim = data.claims[0]
+                    let review = data.claims[0].claimReview[0]
+                    if (review.textualRating === "True") {
+                        message.react(config.emoji.yes)
+                        let trueCount = settings.messagesCheckedTrue+1
+                        functions.updateGuild(message.guild.id, {messagesCheckedTrue: trueCount}, client)
+                    } else {
+                        let flseCount = settings.messagesCheckedFalse+1
+                        functions.updateGuild(message.guild.id, {messagesCheckedFalse: flseCount}, client)
+                        client.api.channels(message.channel.id).messages.post({
+                            data: {
+                                embed: {
+                                    title: `${config.emoji.no} ${review.textualRating}`,
+                                    description: `**False Fact:** ${claim.text}\n\n**📋 Proof:** ${review.title ? review.title : ""}\n🔗 ${review.url}`,
+                                    color: 15158332,
+                                    footer: {
+                                        text: `Provided by ${review.publisher.site}`
+                                    }
+                                },
+                                message_reference: { message_id: message.id },
+                                allowed_mentions: {
+                                    users: []
                                 }
-                            },
-                            message_reference: { message_id: message.id },
-                            allowed_mentions: {
-                                users: []
                             }
-                        }
-                    })
+                        })
+                    }
                 }
-            }).catch(err => {
-                console.error(err)
-                let errCount = settings.messagesCheckedError+1
-                functions.updateGuild(message.guild.id, {messagesCheckedError: errCount}, client)
-            })
+            } else {
+                axios.get('https://factchecktools.googleapis.com/v1alpha1/claims:search', {
+                    params: {
+                        key: process.env.GOOGLE_API_KEY,
+                        query: tocheck,
+                        languageCode: "en-US",
+                    }
+                }).then(res => {
+                    previousResponses.set(tocheck, res.data)
+                    if (res.data.claims) {
+                        let claim = res.data.claims[0]
+                        let review = res.data.claims[0].claimReview[0]
+                        if (review.textualRating === "True") {
+                            message.react(config.emoji.yes)
+                            let trueCount = settings.messagesCheckedTrue+1
+                            functions.updateGuild(message.guild.id, {messagesCheckedTrue: trueCount}, client)
+                        } else {
+                            let flseCount = settings.messagesCheckedFalse+1
+                            functions.updateGuild(message.guild.id, {messagesCheckedFalse: flseCount}, client)
+                            client.api.channels(message.channel.id).messages.post({
+                                data: {
+                                    embed: {
+                                        title: `${config.emoji.no} ${review.textualRating}`,
+                                        description: `**False Fact:** ${claim.text}\n\n**📋 Proof:** ${review.title ? review.title : ""}\n🔗 ${review.url}`,
+                                        color: 15158332,
+                                        footer: {
+                                            text: `Provided by ${review.publisher.site}`
+                                        }
+                                    },
+                                    message_reference: { message_id: message.id },
+                                    allowed_mentions: {
+                                        users: []
+                                    }
+                                }
+                            })
+                        }
+                    }
+                }).catch(err => {
+                    console.error(err)
+                    let errCount = settings.messagesCheckedError+1
+                    functions.updateGuild(message.guild.id, {messagesCheckedError: errCount}, client)
+                })
+            }
         }
     }
 
