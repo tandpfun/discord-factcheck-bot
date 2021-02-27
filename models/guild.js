@@ -12,7 +12,15 @@ const guildSchema = mongoose.Schema({
         type: Boolean,
         default: defaults.checkMessages
     },
+    messagesCheckedDuplicate: {
+        type: Number,
+        default: defaults.checkedFalseCount
+    },
     messagesCheckedFalse: {
+        type: Number,
+        default: defaults.checkedFalseCount
+    },
+    messagesCheckedTrue: {
         type: Number,
         default: defaults.checkedFalseCount
     },

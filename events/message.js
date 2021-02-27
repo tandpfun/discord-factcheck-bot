@@ -51,6 +51,10 @@ module.exports = async (client, message) => {
 
             if (previousResponses.get(tocheck)) {
                 let data = previousResponses.get(tocheck)
+
+                let prevCount = settings.messagesCheckedDuplicate+1
+                functions.updateGuild(message.guild.id, {messagesCheckedDuplicate: prevCount}, client)
+
                 if (data.claims) {
                     let claim = data.claims[0]
                     let review = data.claims[0].claimReview[0]
