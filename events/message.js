@@ -9,8 +9,6 @@ module.exports = async (client, message) => {
     let config = client.config
     let functions = client.functions
 
-    if (message.guild.id === "568957622808739841") return;
-
     if (!mongoose.connection.readyState) return; // Make sure that the bot is connected to the database!
 
     if (message.channel.type === "dm") return; // Make sure that the bot is not responding in DMs
