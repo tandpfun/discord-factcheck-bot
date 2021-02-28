@@ -89,6 +89,15 @@ module.exports = async (client, message) => {
                                 }
                             }
                         })
+
+                        let users = Object.fromEntries(settings.users)
+                        if (users[message.author.id]) {
+                            users[message.author.id]++
+                            functions.updateGuild(message.guild.id, {users: Object.entries(users)}, client)
+                        } else {
+                            users[message.author.id]=1
+                            functions.updateGuild(message.guild.id, {users: Object.entries(users)}, client)
+                        }
                     }
                 }
             } else {
@@ -113,7 +122,7 @@ module.exports = async (client, message) => {
                                     }
                                 }
                             })
-                            
+
                             let trueCount = settings.messagesCheckedTrue+1
                             functions.updateGuild(message.guild.id, {messagesCheckedTrue: trueCount}, client)
                         } else {
@@ -134,6 +143,15 @@ module.exports = async (client, message) => {
                                     }
                                 }
                             })
+
+                            let users = Object.fromEntries(settings.users)
+                            if (users[message.author.id]) {
+                                users[message.author.id]++
+                                functions.updateGuild(message.guild.id, {users: Object.entries(users)}, client)
+                            } else {
+                                users[message.author.id]=1
+                                functions.updateGuild(message.guild.id, {users: Object.entries(users)}, client)
+                            }
                         }
                     }
                 }).catch(err => {

@@ -1,0 +1,74 @@
+<html>
+    <head>
+        <title>FactCheq Dashboard</title>
+        <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+        <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+        <link href="/assets/main.css" rel="stylesheet" />
+    </head>
+    <body>
+        <header><span class="header-title">FactCheqr Dashboard</span></header>
+        <div class="dash">
+            <div class="counters row">
+                <div class="col">
+                    <div class="card border-left-blue counter">
+                        <div class="inside-card">
+                            <div class="card-body">
+                                <div class="card-title blue">Messages Checked</div>
+                                <div class="card-text"><%= serverData.messagesChecked %></div>
+                            </div>
+                            <div class="card-icon>"><i class="fas fa-inbox fa-2x"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card border-left-red counter">
+                        <div class="inside-card">
+                            <div class="card-body">
+                                <div class="card-title red">Messages Checked False</div>
+                                <div class="card-text"><%= serverData.messagesCheckedFalse %></div>
+                            </div>
+                            <div class="card-icon>"><i class="fas fa-times-circle fa-2x"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card border-left-green counter">
+                        <div class="inside-card">
+                            <div class="card-body">
+                                <div class="card-title green">Messages Checked True</div>
+                                <div class="card-text"><%= serverData.messagesCheckedTrue %></div>
+                            </div>
+                            <div class="card-icon>"><i class="fas fa-check-circle fa-2x"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card border-left-yellow counter">
+                        <div class="inside-card">
+                            <div class="card-body">
+                                <div class="card-title yellow">Messages Checked Unknown</div>
+                                <div class="card-text"><%= serverData.messagesChecked-(serverData.messagesCheckedFalse+serverData.messagesCheckedTrue) %></div>
+                            </div>
+                            <div class="card-icon>"><i class="fas fa-question-circle fa-2x"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="users-row">
+                <div class="user-col">
+                    <div class="card border-left-yellow counter">
+                        <div class="inside-card">
+                            <div class="card-body">
+                                <div class="card-title yellow">Top User Detections</div>
+                                <% serverData.users.forEach((u, index) => { %>
+                                    <div class="user-text"><%= index+1 %>. <%= u[0].username %>#<%= u[0].discriminator %> (<%= u[0].id %>) - <%= u[1] %> Detection<% if (u[1]>1) {%>s<% } %></div>
+                                <% }) %>
+                            </div>
+                            <div class="card-icon>"><i class="fas fa-user fa-2x"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

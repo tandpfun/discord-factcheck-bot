@@ -1,0 +1,129 @@
+body {
+    background-color: #2C2F33;
+    color: white;
+    font-family: "Poppins", sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+.header-title {
+    font-size: 1.5rem
+}
+
+header {
+    background-color: #23272A;
+    padding: 12px
+}
+
+.row {
+    margin: 30px 30px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.col {
+    max-width: 25%;
+    flex: 0 0 25%;
+    display: block;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    box-sizing: border-box !important;
+}
+
+.user-col {
+    max-width: 80%;
+    flex: 0 0 50%;
+    margin: auto
+}
+
+.users-row {
+    align-items: center;
+    margin: auto;
+    width: 75%;
+}
+
+.card {
+    background-color: #23272A;
+    border-color: #23272A;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    border-radius: 0.35rem;
+    padding: 1rem;
+}
+
+.inside-card {
+    align-items: center !important;
+    box-sizing: border-box;
+    display: flex;
+    flex-basis: auto;
+    margin-right:0;
+    margin-left:0;
+}
+
+.card-body {
+    flex-basis: 0;
+    flex-grow: 1;
+}
+
+.border-left-blue {
+    border-left: .25rem solid #4e73df !important
+}
+
+.border-left-green {
+    border-left: .25rem solid #2ECC71 !important
+}
+
+.border-left-red {
+    border-left: .25rem solid #E74C3C !important
+}
+
+.border-left-yellow {
+    border-left: .25rem solid #f6c23e !important
+}
+
+.blue {
+    color: #4e73df
+}
+
+.green {
+    color: #2ECC71
+}
+
+.red {
+    color: #E74C3C
+}
+
+.yellow {
+    color: #f6c23e
+}
+
+.card-title {
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.card-text {
+    font-weight: 700;
+    font-size: 2rem;
+}
+
+.user-text {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.card-icon {
+    padding-left: 0;
+    padding-right: 0;
+    flex: 0 0 auto;
+    width: auto;
+    max-width: 100%;
+    position: relative;
+    min-height: 1px;
+    box-sizing: border-box;
+    display: block;
+}
+

@@ -72,5 +72,6 @@ module.exports = {
         dbl: "<:dbl:801614501887475733>",
         boost: "<:nitrobooster:699527482629554196>",
     },
-    prefix: "fc!"
+    prefix: "fc!",
+    port: 8080,
 }
